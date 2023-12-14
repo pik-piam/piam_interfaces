@@ -832,5 +832,4 @@ Capital Cost|Electricity|Storage|Reservoir Capacity;EUR_2020/kW;;;;;;;
 Capital Cost|Electricity|Transmissions Grid;EUR_2020/kW;;;;;;;
 Capital Cost|Hydrogen|Electricity;EUR_2020/kW;Tech|Hydrogen|Electricity|Capital Costs;US$2005/kW;1.17;;;;
 Efficiency|Hydrogen|Electricity;%;Tech|Hydrogen|Electricity|Efficiency;%;1;;;;
-Efficiency|Electricity|Hydrogen;%;Tech|Electricity|Hydrogen|Efficiency;%;1;;;;
 Lifetime|Electricity|Nuclear;years;Tech|Electricity|Nuclear|Lifetime;years;1;;;;
