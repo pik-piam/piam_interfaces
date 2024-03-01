@@ -3,11 +3,12 @@
 #' @md
 #' @author Falk Benke, Oliver Richters
 #' @param mifFile path to the mif file to apply summation checks to, or quitte object
-#' @param dataDumpFile file where data.frame with the data analysis is saved. If NULL, result is returned
-#' @param outputDirectory path to directory to place logFile and dataDumpFile
-#' @param logFile file where human-readable summary is saved. If NULL, write to stdout
+#' @param dataDumpFile file where data.frame with the data analysis is saved. Requires outputDirectory.
+#'        If NULL, result is returned.
+#' @param outputDirectory path to directory to place logFile and dataDumpFile.
+#' @param logFile file where human-readable summary is saved. If NULL, write to stdout. If FALSE, don't log.
 #' @param logAppend boolean whether to append or overwrite logFile
-#' @param generatePlots boolean whether pdfs to compare data are generated
+#' @param generatePlots boolean whether pdfs to compare data are generated. Requires outputDirectory.
 #' @param mainReg main region for the plot generation
 #' @param summationsFile in inst/summations folder that describes the required summation groups
 #'        if set to 'extractVariableGroups', tries to extract summations from variables with + notation
@@ -23,6 +24,7 @@
 #' @param csvSeparator separator for dataDumpFile, defaults to semicolon
 #' @importFrom dplyr group_by summarise ungroup left_join mutate arrange %>%
 #'             filter select desc reframe last_col
+#' @importFrom gms chooseFromList
 #' @importFrom grDevices pdf dev.off
 #' @importFrom magclass unitsplit
 #' @importFrom mip showAreaAndBarPlots extractVariableGroups
@@ -37,8 +39,12 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
                             logFile = NULL, logAppend = FALSE, generatePlots = FALSE, mainReg = "World",
                             dataDumpFile = "checkSummations.csv", remindVar = "piam_variable",
                             plotprefix = NULL, absDiff = 0.001, relDiff = 1, roundDiff = TRUE, csvSeparator = ";") {
-  if (!is.null(outputDirectory) && !dir.exists(outputDirectory) && ! is.null(c(logFile, dataDumpFile))) {
-    dir.create(outputDirectory, recursive = TRUE)
+  if (is.null(outputDirectory)) {
+    dataDumpFile <- NULL
+    generatePlots <- FALSE
+  } else {
+    dir.create(outputDirectory, recursive = TRUE, showWarnings = FALSE)
+    logFile <- setLogFile(outputDirectory, logFile)
   }
 
   data <- quitte::as.quitte(mifFile, na.rm = TRUE)
@@ -47,6 +53,7 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
     checkVariables <- extractVariableGroups(levels(data$variable), keepOrigNames = TRUE)
     names(checkVariables) <- make.unique(names(checkVariables), sep = " ")
   } else {
+    if (is.null(summationsFile)) summationsFile <- chooseFromList(names(summationsNames()), multiple = FALSE)
     summationGroups <- getSummations(summationsFile)
     if (summationsFile %in% names(summationsNames())) {
       summationsFile <- gsub(".*piamInterfaces", "piamInterfaces", summationsNames(summationsFile))
@@ -64,7 +71,7 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
 
   data <- data %>%
     filter(!!sym("variable") %in% unique(c(parentVariables, unlist(checkVariables, use.names = FALSE))))
-  message("The filtered data contains ", length(unique(data$variable)), " variables.")
+  message("# The filtered data contains ", length(unique(data$variable)), " variables.")
 
   if (nrow(data) == 0) {
     return(NULL)
@@ -72,11 +79,11 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
 
   # start with an empty tibble, such that return values always have the same
   # structure
-  tmp <- tibble(model = factor(), scenario = factor(),
-                          region = factor(), period = integer(),
-                          variable = character(), unit = factor(),
-                          value = numeric(), checkSum = numeric(),
-                          diff = numeric(), reldiff = numeric())
+  comparison <- tibble(model = factor(), scenario = factor(),
+                region = factor(), period = integer(),
+                variable = character(), unit = factor(),
+                value = numeric(), checkSum = numeric(),
+                diff = numeric(), reldiff = numeric())
 
   # iterate over summation rules
   for (i in seq_along(checkVariables)) {
@@ -92,7 +99,7 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
       rename("child" = !!sym("variable"), "childVal" = !!sym("value"))
     comp <- left_join(parent, children, by = c("model", "scenario", "region", "period")) %>%
       # adapt unit of parent variable
-      mutate(!!sym("unit") := !!sym("unit.x")) %>%
+      mutate("unit" = .data$unit.x) %>%
       select(-c("unit.x", "unit.y"))
 
     # add NA entries for children in summation rule not found in data
@@ -122,28 +129,30 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
           collapse = " + "),
         .groups = "drop") %>%
       ungroup() %>%
+      mutate(diff = !!sym("checkSum") - !!sym("value")) %>%
       mutate(
-        diff = !!sym("checkSum") - !!sym("value"),
-        reldiff = 100 * (!!sym("checkSum") - !!sym("value")) / !!sym("value"),
+        reldiff = ifelse(abs(!!sym("checkSum")) + abs(!!sym("value")) == 0, 0, 100 * !!sym("diff") / !!sym("value")),
         details = gsub("\\+ \\-", "-", !!sym("details"))
       ) %>%
       relocate(!!sym("details"), .after = last_col())
 
-    tmp <- rbind(tmp, comp)
+    comparison <- rbind(comparison, comp)
   }
 
   # write data to dataDumpFile
   if (!is.null(outputDirectory) && length(dataDumpFile) > 0) {
     dataDumpFile <- file.path(outputDirectory, dataDumpFile)
 
-    out <- arrange(tmp, desc(abs(!!sym("reldiff"))))
+    fileLarge <- comparison %>%
+      filter(abs(!!sym("reldiff")) >= relDiff, abs(!!sym("diff")) >= absDiff) %>%
+      arrange(desc(abs(!!sym("reldiff"))))
 
-    if (roundDiff) {
-      out <- tmp %>% mutate(reldiff = niceround(!!sym("reldiff"), digits = 1))
+    if (isTRUE(roundDiff)) {
+      fileLarge <- fileLarge %>% mutate(reldiff = niceround(!!sym("reldiff"), digits = 2))
     }
 
     write.table(
-      out,
+      fileLarge,
       file = dataDumpFile,
       sep = csvSeparator,
       quote = FALSE,
@@ -153,17 +162,19 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
 
   # generate human-readable summary of larger differences
   .checkSummationsSummary(
-    mifFile, data, tmp, template, summationsFile, checkVariables,
+    mifFile, data, comparison, template, summationsFile, summationGroups, checkVariables,
     generatePlots, mainReg, outputDirectory, logFile, logAppend, dataDumpFile, remindVar,
     plotprefix, absDiff, relDiff, roundDiff
   )
 
-  return(invisible(tmp))
+  return(invisible(comparison))
 }
 
-.checkSummationsSummary <- function(mifFile, data, tmp, template, summationsFile, # nolint: cyclocomp_linter.
-                             checkVariables, generatePlots, mainReg, outputDirectory, logFile, logAppend,
-                             dataDumpFile, remindVar, plotprefix, absDiff, relDiff, roundDiff) {
+.checkSummationsSummary <- function(mifFile, data, comparison, template, summationsFile, # nolint: cyclocomp_linter.
+                                    summationGroups, checkVariables, generatePlots,
+                                    mainReg, outputDirectory, logFile, logAppend,
+                                    dataDumpFile, remindVar, plotprefix, absDiff,
+                                    relDiff, roundDiff) {
 
   text <- paste0("\n### Analyzing ", if (is.null(ncol(mifFile))) mifFile else "provided data",
                  ".\n# Use ", summationsFile, " to check if summation groups add up.")
@@ -178,9 +189,10 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
       templateData <- data.frame(template)
     }
   }
+
   for (thismodel in quitte::getModels(data)) {
     text <- c(text, paste0("# Analyzing results of model ", thismodel))
-    fileLarge <- filter(tmp, abs(!!sym("reldiff")) >= relDiff,
+    fileLarge <- filter(comparison, abs(!!sym("reldiff")) >= relDiff,
                         abs(!!sym("diff")) >= absDiff, !!sym("model") == thismodel)
     problematic <- sort(unique(c(fileLarge$variable)))
     if (length(problematic) > 0) {
@@ -189,7 +201,7 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
                                  paste0(plotprefix, "checkSummations_", gsub(" ", "_", thismodel), ".pdf"))
         pdf(pdfFilename,
             width = max(12, length(quitte::getRegs(fileLarge)), length(quitte::getScenarios(fileLarge)) * 2))
-        plotdata <- filter(data, !!sym("model") == thismodel)
+        plotdata <- filter(data, .data$model == thismodel)
         message(length(problematic), " plots will be generated for ", thismodel, ", this will take some time.")
       }
       width <- 70
@@ -198,19 +210,20 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
         if (! is.null(template)) paste0("corresponding REMIND/MAgPIE variables extracted from ", basename(templateName))
          ))
       for (p in problematic) {
+        pn <- gsub(" [1-9]$", "", p)
         signofdiff <- paste0("<"[max(fileLarge$diff[fileLarge$variable == p]) > 0],
                              ">"[min(fileLarge$diff[fileLarge$variable == p]) < 0])
 
         childs <- checkVariables[[p]]
 
         remindchilds <- if (is.null(template)) NULL else
-                        unitsplit(templateData[, remindVar][unitsplit(templateData$Variable)$variable == p])$variable
+                        unitsplit(templateData[, remindVar][unitsplit(templateData$variable)$variable == pn])$variable
         text <- c(text, paste0("\n", str_pad(paste(p, signofdiff), width + 5, "right"), "   ",
                   paste0(paste0(remindchilds, collapse = " + "), " ", signofdiff)[! is.null(remindchilds)]
                   ))
         for (ch in childs) {
           remindch <- if (is.null(template)) NULL else
-                      unitsplit(templateData[, remindVar][unitsplit(templateData$Variable)$variable == ch])$variable
+                      unitsplit(templateData[, remindVar][unitsplit(templateData$variable)$variable == ch])$variable
           text <- c(text, paste0("   + ", str_pad(ch, width, "right"),
                     if (! is.null(remindch)) paste0("      + ", paste0(remindch, collapse = " + "))))
         }
@@ -238,9 +251,20 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
         }
         if (generatePlots) {
           message("Add plot for ", p)
-          mip::showAreaAndBarPlots(plotdata, intersect(childs, unique(plotdata$variable)),
-                                   tot = gsub(" [1-9]$", "", p),
-                                   mainReg = mainReg, yearsBarPlot = c(2030, 2050), scales = "fixed")
+          s <- summationGroups %>%
+            filter(.data$parent == p) %>%
+            select(c("child", "factor"))
+
+          df <- data %>%
+            left_join(s, by = c("variable" = "child")) %>%
+            mutate("value" = ifelse(is.na(.data$factor), .data$value, .data$value * .data$factor),
+                   "unit" = filter(plotdata, .data$variable == pn)$unit[[1]]) %>%
+            select(-"factor")
+
+          mip::showAreaAndBarPlots(df, intersect(childs, unique(plotdata$variable)),
+            tot = pn,
+            mainReg = mainReg, yearsBarPlot = c(2030, 2050), scales = "fixed"
+          )
         }
       }
       # print to log or stdout
@@ -250,7 +274,7 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
         paste0("# All deviations can be found in the returned object",
                paste0(" and in ", dataDumpFile)[! is.null(dataDumpFile)], "."),
         paste0("# To get more detailed information on '", problematic[1], "', run piamInterfaces::variableInfo('",
-               problematic[1], "').")
+               pn, "').")
         )
       if (generatePlots) {
         dev.off()
@@ -263,8 +287,7 @@ checkSummations <- function(mifFile, outputDirectory = ".", template = NULL, sum
   summarytext <- c(summarytext, "\n# As generatePlots=FALSE, no plot comparison was produced."[! generatePlots])
   if (is.null(logFile)) {
     message(paste(c(text, summarytext, ""), collapse = "\n"))
-  } else {
-    if (! is.null(outputDirectory)) logFile <- file.path(outputDirectory, logFile)
+  } else if (! isFALSE(logFile)) {
     message(paste(c(text[1], summarytext,
             paste0("# Find log with human-readable information appended to ", logFile)), "", collapse = "\n"))
     write(c(text, summarytext, ""), file = logFile, append = logAppend)

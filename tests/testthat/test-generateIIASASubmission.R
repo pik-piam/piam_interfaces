@@ -7,33 +7,22 @@ for (template in c(setdiff(names(templateNames()), c("AR6", "NAVIGATE", "AR6_NGF
       data <- rbind(data, select(templateData, c("variable" = "piam_variable", "unit" = "piam_unit")))
     }
 
-    data <- data %>%
+    data <- data %>% #[seq(min(10, nrow(data))), ] %>%
       filter(!is.na(variable)) %>%
       mutate(model = "REMIND", scenario = "default", region = "GLO", value = 1)
 
-    data <- tidyr::crossing(data, year = seq(2005, 2030, 5))
-    quitte::write.mif(x = as.quitte(data), path = file.path(tempdir(), "test.mif"))
+    data <- tidyr::crossing(data, year = seq(2005, 2020, 5))
 
-    mappingFile <- file.path(tempdir(), "output", paste0("mapping_", paste0(template, collapse = "_"), ".csv"))
-    if (any(template == "AR6")) {
-      generateMappingfile(templates = unlist(template), outputDirectory = NULL,
-                          fileName = mappingFile)
-      expect_no_warning(generateIIASASubmission(file.path(tempdir(), "test.mif"), model = "MAgPIE",
-                                                mappingFile = mappingFile,
-                                                outputDirectory = file.path(tempdir(), "output"),
-                                                logFile = file.path(tempdir(), "missing.log"),
-                                                outputFilename = "submission.xlsx")
-      )
-    } else {
-      expect_no_warning(generateIIASASubmission(tempdir(), model = "REMIND", mapping = unlist(template),
-                                                outputDirectory = file.path(tempdir(), "output"),
-                                                logFile = file.path(tempdir(), "missing.log"),
-                                                outputFilename = "submission.mif")
-      )
-    }
-    expectedFiles <- file.path(
-      tempdir(), c(file.path("output", if (any(template == "AR6")) "submission.xlsx" else "submission.mif"))
+    outputFilename <- if (any(template == "AR6")) "submission.xlsx" else "submission.mif"
+
+    expect_no_warning(generateIIASASubmission(as.quitte(data), model = "REMIND", mapping = unlist(template),
+                                              outputDirectory = file.path(tempdir(), "output"),
+                                              logFile = file.path(tempdir(), "missing.log"),
+                                              outputFilename = outputFilename,
+                                              checkSummation = any(template == "NAVIGATE")),
+      message = paste0("warnings for template(s)", paste(template, collapse = ","))
     )
+    expectedFiles <- file.path(tempdir(), "output", outputFilename)
 
     for (f in expectedFiles) expect_true(file.exists(f))
     unlink(expectedFiles)
@@ -41,7 +30,7 @@ for (template in c(setdiff(names(templateNames()), c("AR6", "NAVIGATE", "AR6_NGF
 }
 
 test_that("Correct Prices are selected and plusses ignored", {
-  qe <- quitte::quitte_example_dataAR6
+  qe <- qeAR6
   vars <- c("Price|Secondary Energy|++|Electricity|Rawdata",
             "Price|Secondary Energy|++|Electricity|Moving Avg",
             "Price|Secondary Energy|++|Electricity",
@@ -87,4 +76,10 @@ test_that("Correct Prices are selected and plusses ignored", {
   qemif2 <- quitte::as.quitte(f2)
   peSeGas <- unique(filter(qemif2, !!sym("variable") == "Price|Secondary Energy|Gases|Natural Gas")$value)
   expect_identical(round(peSeGas / 1.1), 4)
+})
+
+test_that("fail on duplicated data", {
+  dupl <- rbind(testdata, testdata)
+  expect_error(generateIIASASubmission(dupl, mapping = "AR6", outputFilename = NULL, logFile = NULL),
+               "Duplicated data found")
 })

@@ -25,22 +25,23 @@ checkSummations(
 \arguments{
 \item{mifFile}{path to the mif file to apply summation checks to, or quitte object}
 
-\item{outputDirectory}{path to directory to place logFile and dataDumpFile}
+\item{outputDirectory}{path to directory to place logFile and dataDumpFile.}
 
 \item{template}{mapping template to be loaded, used to print the remindVar corresponding to the data variables}
 
 \item{summationsFile}{in inst/summations folder that describes the required summation groups
 if set to 'extractVariableGroups', tries to extract summations from variables with + notation}
 
-\item{logFile}{file where human-readable summary is saved. If NULL, write to stdout}
+\item{logFile}{file where human-readable summary is saved. If NULL, write to stdout. If FALSE, don't log.}
 
 \item{logAppend}{boolean whether to append or overwrite logFile}
 
-\item{generatePlots}{boolean whether pdfs to compare data are generated}
+\item{generatePlots}{boolean whether pdfs to compare data are generated. Requires outputDirectory.}
 
 \item{mainReg}{main region for the plot generation}
 
-\item{dataDumpFile}{file where data.frame with the data analysis is saved. If NULL, result is returned}
+\item{dataDumpFile}{file where data.frame with the data analysis is saved. Requires outputDirectory.
+If NULL, result is returned.}
 
 \item{remindVar}{REMIND/MAgPIE variable column name in template}
 

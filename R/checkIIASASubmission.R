@@ -6,7 +6,7 @@
 #' @param iiasatemplate filename of xlsx or yaml file provided by IIASA
 #' @param failOnUnitMismatch boolean whether to fail in case of unit mismatches
 #'        recommended for submission, not used for generating templates
-#' @param logFile filename of file for logging
+#' @param logFile filename of file for logging. Set to NULL for stdout, set to FALSE for none.
 #' @importFrom dplyr filter
 #' @importFrom quitte read.quitte
 #' @importFrom stringr str_split
@@ -22,30 +22,35 @@
 #' }
 #' @export
 checkIIASASubmission <- function(mifdata, iiasatemplate, logFile = NULL, failOnUnitMismatch = TRUE) {
-  variable <- NULL # to avoid global binding note
-
-  if (length(mifdata) == 1 && file.exists(mifdata)) {
-    mifdata <- read.quitte(mifdata, factors = FALSE)
-  }
+  mifdata <- droplevels(as.quitte(mifdata, na.rm = TRUE))
   cat(paste0("\n### Load IIASA template file ", iiasatemplate, ".\n"))
-  if (is.null(logFile)) {
-    logFile <- stdout()
-  } else {
-    cat(paste0("# Find info on deleted variables, unit and data mismatches in ", logFile, ".\n"))
+  if (! isFALSE(logFile)) {
+    if (is.null(logFile)) {
+      logFile <- stdout()
+    } else {
+      cat(paste0("# Find info on deleted variables, unit and data mismatches in ", logFile, ".\n"))
+    }
   }
   template <- loadIIASATemplate(iiasatemplate)
 
-  varsNotInTemplate <- sort(unique(mifdata$variable[! mifdata$variable %in% template$variable]))
+  varsNotInTemplate <- mifdata %>%
+    filter(! .data$variable %in% unique(template$variable)) %>%
+    droplevels() %>%
+    pull(.data$variable) %>%
+    levels() %>%
+    sort()
 
   cat(paste0("# ", length(varsNotInTemplate), " variables not in IIASA template are deleted.\n"))
-  write(paste0("\n\n#--- ", length(varsNotInTemplate), " variables not in IIASA template ", iiasatemplate,
-               " are deleted ---#"), file = logFile, append = TRUE)
-  write(paste0("  - ", paste(varsNotInTemplate, collapse = "\n  - ")), file = logFile, append = TRUE)
-  mifdata <- filter(mifdata, variable %in% template$variable)
+  if (! isFALSE(logFile)) {
+    write(paste0("\n\n#--- ", length(varsNotInTemplate), " variables not in IIASA template ", iiasatemplate,
+                 " are deleted ---#"), file = logFile, append = TRUE)
+    write(paste0("  - ", paste(varsNotInTemplate, collapse = "\n  - ")), file = logFile, append = TRUE)
+  }
+  mifdata <- filter(mifdata, .data$variable %in% template$variable)
 
   mifdata <- checkFixUnits(mifdata, template, logFile, failOnUnitMismatch = failOnUnitMismatch)
 
-  # if data is suppled (not while generating mapping file), check whether scenarios have same number of variables
+  # if data is supplied (not while generating mapping file), check whether scenarios have same number of variables
   if ("value" %in% names(mifdata)) {
     checkDataLength(mifdata, logFile)
   }
@@ -57,13 +62,14 @@ checkIIASASubmission <- function(mifdata, iiasatemplate, logFile = NULL, failOnU
 
 
 checkDataLength <- function(mifdata, logFile =  NULL) {
+  mifdata <- as.quitte(mifdata)
   differingdatalength <- 0
   logtext <- "\n\n### Check whether all scenarios have same number of variables"
   for (vari in levels(mifdata$variable)) {
     countDataPoints <- seq_along(levels(mifdata$scenario))
     for (i in countDataPoints) {
       countDataPoints[i] <- sum(droplevels(filter(mifdata, !!sym("variable") == vari))$scenario
-                             == levels(mifdata$scenario)[[i]])
+                                == levels(mifdata$scenario)[[i]])
     }
     if (length(unique(countDataPoints)) != 1) {
       logtext <- c(logtext,
@@ -78,7 +84,7 @@ checkDataLength <- function(mifdata, logFile =  NULL) {
   } else {
     cat(paste0("# ", differingdatalength, " variables found whose data points differ between scenarios"))
   }
-  if (length(logtext) > 0 && ! is.null(logFile)) {
+  if (length(logtext) > 0 && ! is.null(logFile) && ! isFALSE(logFile)) {
     write(logtext, file = logFile, append = TRUE)
   }
 }

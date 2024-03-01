@@ -7,12 +7,13 @@
 #' @param failOnUnitMismatch boolean whether to fail in case of unit mismatches
 #'        recommended for submission, not used for generating templates
 #' @param logFile filename of file for logging
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter mutate
+#' @importFrom rlang .data
 #' @importFrom stringr str_split
 #' @return quitte object with adapted mif data
 #' @export
 
-checkFixUnits <- function(mifdata, template, logFile = NULL, failOnUnitMismatch = TRUE) {
+checkFixUnits <- function(mifdata, template, logFile = NULL, failOnUnitMismatch = TRUE) { # nolint cyclocomp_linter
   # use template units as names and map it to remind2 unit with identical meaning
   identicalUnits <- c("billion m2/yr" = "bn m2/yr",
                       "billion pkm/yr" = "bn pkm/yr",
@@ -29,19 +30,21 @@ checkFixUnits <- function(mifdata, template, logFile = NULL, failOnUnitMismatch 
                       "bn m2" = "bn m2/yr",
                  NULL)
 
+  mifdata <- droplevels(as.quitte(mifdata))
   # try to identify and fix wrong units
   wrongUnits <- data.frame(variable = character(), templateunit = character(), mifunit = character())
   logtext <- NULL
-  for (mifvar in unique(mifdata$variable)) {
+  for (mifvar in levels(mifdata$variable)) {
     templateunit <- unique(template$unit[template$variable == mifvar])
-    mifunit <- unique(mifdata$unit[mifdata$variable == mifvar])
+    mifunit <- levels(droplevels(filter(mifdata, .data$variable == mifvar))$unit)
     # find unit mismatches
     if (! all(mifunit %in% c(unlist(str_split(templateunit, " [Oo][Rr] ")), templateunit))) {
       if (length(identicalUnits) > 0 && templateunit %in% names(identicalUnits)
           && all(identicalUnits[[templateunit]] == mifunit)) {
         # fix wrong spelling of units as allowed in identicalUnits
         logtext <- c(logtext, paste0("  - for ", mifvar, ": ", mifunit, " -> ", templateunit, "."))
-        mifdata$unit[mifdata$variable == mifvar] <- templateunit
+        mifdata <- mifdata %>%
+          mutate(unit = factor(ifelse(.data$variable == mifvar, templateunit, as.character(.data$unit))))
       } else if (all(grepl("^Index \\([0-9]* = 1\\)$", mifunit))) {
         if ("value" %in% names(mifdata)) {
           logtext <- c(logtext, paste0("  - for ", mifvar, ": ", mifunit, " -> ", templateunit, ", data adapted."))
@@ -65,7 +68,7 @@ checkFixUnits <- function(mifdata, template, logFile = NULL, failOnUnitMismatch 
     logtext <- c(logtext, reportWrongUnits(wrongUnits))
   }
 
-  if (length(logtext) > 0 && ! is.null(logFile)) {
+  if (length(logtext) > 0 && ! is.null(logFile) && ! isFALSE(logFile)) {
     write(logtext, file = logFile, append = TRUE)
   }
 

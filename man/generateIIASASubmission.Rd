@@ -2,43 +2,48 @@
 % Please edit documentation in R/generateIIASASubmission.R
 \name{generateIIASASubmission}
 \alias{generateIIASASubmission}
-\title{Generates an IIASA submission from REMIND runs by applying a project-specific mapping}
+\title{generateIASASubmission}
 \usage{
 generateIIASASubmission(
   mifs = ".",
   mapping = NULL,
-  model = "REMIND 3.1",
-  mappingFile = NULL,
+  model = NULL,
   removeFromScen = NULL,
   addToScen = NULL,
   outputDirectory = "output",
-  logFile = "output/missing.log",
   outputFilename = "submission.xlsx",
+  logFile = if (is.null(outputFilename)) NULL else paste0(gsub("\\\\.[a-zA-Z]+$",
+    "_log.txt", outputFilename)),
   iiasatemplate = NULL,
   generatePlots = FALSE,
   timesteps = c(seq(2005, 2060, 5), seq(2070, 2100, 10)),
-  generateSingleOutput = TRUE
+  checkSummation = TRUE,
+  mappingFile = NULL
 )
 }
 \arguments{
 \item{mifs}{path to mif files or directories with mif files of a REMIND run,
 or quitte object}
 
-\item{mapping}{mapping template names such as c("AR6", "AR6_NGFS"). If NULL, user is asked}
+\item{mapping}{mapping template names such as c("AR6", "AR6_NGFS") or a vector of file names with mapping templates.
+If NULL, the user is asked. Multiple templates are concatenated.}
 
-\item{model}{name of model registered with IIASA}
+\item{model}{name of model as registered with IIASA}
 
-\item{mappingFile}{path to mapping. If NULL, mapping is generated based on param mapping}
-
-\item{removeFromScen}{string to be removed from scenario name (optional)}
+\item{removeFromScen}{regular expression to be removed from scenario name (optional). Example: '_d50|d95'}
 
 \item{addToScen}{string to be added as prefix to scenario name (optional)}
 
-\item{outputDirectory}{path to directory for the generated submission (default: output)}
+\item{outputDirectory}{path to directory for the generated submission (default: output).
+If NULL, no files are written and \code{logFile} and \code{outputFilename} have no effect.}
 
-\item{logFile}{path to the logfile with warnings (default: output/missing.log)}
+\item{outputFilename}{filename of the generated submission. Must be mif or xlsx file.
+If NULL, submission data is returned.
+If \code{outputDirectory} is set to NULL, this parameter has no effect.}
 
-\item{outputFilename}{filename of the generated submission mif or xlsx file.}
+\item{logFile}{path to the logfile with warnings as passed to generateMappingfile, checkIIASASubmission
+(default: outputDirectory/submission_log.txt). Set to FALSE for none.
+If \code{outputDirectory} is set to NULL, this parameter has no effect.}
 
 \item{iiasatemplate}{optional filename of xlsx or yaml file provided by IIASA
 used to delete superfluous variables and adapt units}
@@ -47,10 +52,39 @@ used to delete superfluous variables and adapt units}
 
 \item{timesteps}{timesteps that are accepted in final submission}
 
-\item{generateSingleOutput}{has no effect and is only kept for backwards-compatibility}
+\item{checkSummation}{either TRUE to identify summation files from mapping, or filename, or FALSE}
+
+\item{mappingFile}{has no effect and is only kept for backwards-compatibility}
 }
 \description{
-Generates an IIASA submission from REMIND runs by applying a project-specific mapping
+Generates an IIASA submission from REMIND or MAgPIE runs by applying a project-specific mapping.
+The script starts from 'mifs' which can be a directory with mif files, a vector of files or a
+quitte object. In outputDirectory/outputFilename, you will get the data in a joint xlsx or mif file.
+}
+\details{
+To provide the mapping, two options exist:
+\itemize{
+\item If you want to generate the mapping from one or more mapping templates from the inst/templates folder,
+set mapping = c("AR6", "AR6_NGFS") or so.
+\item Alternatively, you can provide a path or a vector of paths to template files. If you provide your own template
+files, make sure they follow the standard format (see \code{getTemplate} for more information)
+\item It is also possible, to mix both options, e.g. c("AR6", "/path/to/template_file.csv")
+}
+
+In any case, multiple template files will be concatenated.
+
+iiasatemplate is a xlsx or yaml file provided by IIASA with the variable + unit definitions that are
+accepted in the database. The function 'priceIndicesIIASA' will be called to calculate price indices
+that are missing or with the wrong base year. 'checkIIASASubmission' will be called to remove all variables
+that are not accepted in the database.
+
+For all elements of the parameter mapping that contain a summation file in inst/summations,
+the function 'checkSummations' is called to verify variable summation checks.
+
+To alter the data, you can use those parameters: model, addToScen, removeFromScen and timesteps.
+
+For a broader overview of the submission process, consult
+https://github.com/remindmodel/remind/blob/develop/tutorials/13_Submit_to_IIASA_database.md
 }
 \examples{
 \dontrun{
@@ -58,7 +92,7 @@ Generates an IIASA submission from REMIND runs by applying a project-specific ma
 generateIIASASubmission(
   mifs = "/path/to/REMIMD/mifs",
   model = "REMIND-MAgPIE 2.1-4.2",
-  mappingFile = "output/template_navigate.csv"
+  mapping = "NAVIGATE"
 )
 }
 }
