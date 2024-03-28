@@ -1,6 +1,6 @@
 # Project specific interfaces to REMIND / MAgPIE
 
-R package **piamInterfaces**, version **0.13.11**
+R package **piamInterfaces**, version **0.13.13**
 
 [![CRAN status](https://www.r-pkg.org/badges/version/piamInterfaces)](https://cran.r-project.org/package=piamInterfaces)  [![R build status](https://github.com/pik-piam/piamInterfaces/workflows/check/badge.svg)](https://github.com/pik-piam/piamInterfaces/actions) [![codecov](https://codecov.io/gh/pik-piam/piamInterfaces/branch/master/graph/badge.svg)](https://app.codecov.io/gh/pik-piam/piamInterfaces) [![r-universe](https://pik-piam.r-universe.dev/badges/piamInterfaces)](https://pik-piam.r-universe.dev/builds)
 
