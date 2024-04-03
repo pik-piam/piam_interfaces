@@ -1,0 +1,6 @@
+piam_variable;piam_unit;formula
+# Carbon Intensities
+Carbon Intensity|Production|Cement|Industrial Processes;Mt CO2/Mt;`Emi|CO2|Industrial Processes|Cement` / `Production|Industry|Cement`
+Carbon Intensity|Production|Cement|Fossil|Energy|Demand|Industry;Mt CO2/Mt;(`Emi|CO2|Energy|Demand|Industry|Cement|Gases|Fossil` + `Emi|CO2|Energy|Demand|Industry|Cement|Liquids|Fossil` + `Emi|CO2|Energy|Demand|Industry|Cement|Solids|Fossil`) / `Production|Industry|Cement`
+Carbon Intensity|Production|Cement;Mt CO2/Mt;`Carbon Intensity|Production|Cement|Industrial Processes` + `Carbon Intensity|Production|Cement|Fossil|Energy|Demand|Industry`
+Carbon Intensity|Production|Steel|Fossil|Energy|Demand|Industry;Mt CO2/Mt;(`Emi|CO2|Energy|Demand|Industry|Steel|Gases|Fossil` + `Emi|CO2|Energy|Demand|Industry|Steel|Solids|Fossil` + `Emi|CO2|Energy|Demand|Industry|Steel|Liquids|Fossil`) / `Production|Industry|Steel`

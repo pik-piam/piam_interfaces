@@ -7,7 +7,7 @@ for (mapping in c(setdiff(names(mappingNames()), c("AR6", "NAVIGATE", "AR6_NGFS"
       data <- rbind(data, select(mappingData, c("variable" = "piam_variable", "unit" = "piam_unit")))
     }
 
-    data <- data %>% #[seq(min(10, nrow(data))), ] %>%
+    data <- data %>% # [seq(min(10, nrow(data))), ] %>%
       filter(!is.na(variable)) %>%
       mutate(model = "REMIND", scenario = "default", region = "GLO", value = 1)
 
@@ -44,9 +44,11 @@ test_that("Correct Prices are selected and plusses ignored", {
     qe$value[qe$variable == vars[[v]]] <- v
   }
   f <- file.path(tempdir(), "Pricecheck_AR6_1.mif")
-  expect_no_warning(generateIIASASubmission(droplevels(filter(qe, grepl("Electricity", variable))),
-                                            mapping = "AR6", outputDirectory = dirname(f), checkSummation = FALSE,
-                                            outputFilename = basename(f), logFile = file.path(tempdir(), "price.log")))
+  w <- capture_warnings(generateIIASASubmission(droplevels(filter(qe, grepl("Electricity", variable))),
+                                                mapping = "AR6", outputDirectory = dirname(f), checkSummation = FALSE,
+                                                outputFilename = basename(f),
+                                                logFile = file.path(tempdir(), "price.log")))
+  expect_true(all(grepl("variables are missing for the calculation", w)))
   expect_true(file.exists(f))
   qemif <- quitte::as.quitte(f)
   # you have to devide by 1.1 and round to compensate for inflation 2005 -> 2010
@@ -56,11 +58,12 @@ test_that("Correct Prices are selected and plusses ignored", {
   # check whether results are identical if we remove the plus and don't write to file
   qenoplus <- qe
   levels(qenoplus$variable) <- removePlus(levels(qenoplus$variable))
-  expect_no_warning(qenoplusmif <- droplevels(as.quitte(dplyr::as_tibble(
+  w <- capture_warnings(qenoplusmif <- droplevels(as.quitte(dplyr::as_tibble(
     generateIIASASubmission(droplevels(filter(qe, grepl("Electricity", variable))),
-      mapping = "AR6", outputDirectory = NULL, outputFilename = NULL, logFile = NULL, checkSummation = FALSE
-    )
+                            mapping = "AR6", outputDirectory = NULL, outputFilename = NULL,
+                            logFile = NULL, checkSummation = FALSE)
   ))))
+  expect_true(all(grepl("variables are missing for the calculation", w)))
   sortquitte <- function(d) {
     return(d[order(d$model, d$scenario, d$region, d$variable, d$period), ])
   }
@@ -68,10 +71,13 @@ test_that("Correct Prices are selected and plusses ignored", {
 
   f2 <- file.path(tempdir(), "Pricecheck_AR6_2.mif")
   # if Rawdata is not present, warn
-  expect_warning(generateIIASASubmission(droplevels(filter(qe, grepl("Gases", variable))),
-                                         mapping = "AR6", outputDirectory = dirname(f2), checkSummation = FALSE,
-                                         outputFilename = basename(f2), logFile = file.path(tempdir(), "price.log")),
-                 "Your data contains no Price|*|Rawdata variables.")
+  w <- capture_warnings(generateIIASASubmission(droplevels(filter(qe, grepl("Gases", variable))),
+                                                mapping = "AR6", outputDirectory = dirname(f2),
+                                                checkSummation = FALSE, outputFilename = basename(f2),
+                                                logFile = file.path(tempdir(), "price.log")))
+  w <- grep("variables are missing for the calculation", w, value = TRUE, invert = TRUE)
+  expect_true(length(w) == 1 && grepl("Your data contains no Price|*|Rawdata variables.", w, fixed = TRUE))
+  if (length(w) > 1) warning(w)
   expect_true(file.exists(f2))
   qemif2 <- quitte::as.quitte(f2)
   peSeGas <- unique(filter(qemif2, !!sym("variable") == "Price|Secondary Energy|Gases|Natural Gas")$value)
