@@ -751,16 +751,16 @@ idx;variable;unit;piam_variable;piam_unit;piam_factor;internal_comment;Comment;D
 688;Energy Service|Transportation|Freight;bn tkm/yr;;;;;;annual demand for energy services related to freight transportation
 689;Energy Service|Transportation|Freight|Aviation;bn tkm/yr;;;;;;annual demand for energy services related to freight transportation in aviation
 690;Energy Service|Transportation|Freight|International Shipping;bn tkm/yr;;;;;;annual demand for energy services related to freight transportation in international shipping
-691;Energy Service|Transportation|Freight|Navigation;bn tkm/yr;;;;;;annual demand for energy services related to freight transportation in navigation
+691;Energy Service|Transportation|Freight|Domestic Shipping;bn tkm/yr;;;;;;annual demand for energy services related to freight transportation in navigation
 692;Energy Service|Transportation|Freight|Other;bn tkm/yr;;;;;;annual demand for energy services related to freight transportation (other)
 693;Energy Service|Transportation|Freight|Railways;bn tkm/yr;;;;;;annual demand for energy services related to freight transportation in railways
 694;Energy Service|Transportation|Freight|Road;bn tkm/yr;;;;;;annual demand for energy services related to freight transportation on roads
-695;Energy Service|Transportation|Navigation;bn vkm/yr;;;;;;Annual demand for energy services in billion vehicle-kms related to both passenger and freight transportation by Navigation
+695;Energy Service|Transportation|Domestic Shipping;bn vkm/yr;;;;;;Annual demand for energy services in billion vehicle-kms related to both passenger and freight transportation by Domestic Shipping
 696;Energy Service|Transportation|Passenger;bn pkm/yr;;;;;;annual demand for energy services related to passenger transportation
 697;Energy Service|Transportation|Passenger|Aviation;bn pkm/yr;;;;;;annual demand for energy services related to passenger transportation in aviation
 697;Energy Service|Transportation|Passenger|Aviation;bn pkm/yr;;;;;;annual demand for energy services related to passenger transportation in aviation
-698;Energy Service|Transportation|Passenger|Bicycling and Walking;bn pkm/yr;;;;;;energy service demand for passenger transport on bicycles and by foot
-699;Energy Service|Transportation|Passenger|Navigation;bn pkm/yr;;;;;;annual demand for energy services related to passenger transportation in navigation
+698;Energy Service|Transportation|Passenger|Bicycling and Walk;bn pkm/yr;;;;;;energy service demand for passenger transport on bicycles and by foot
+699;Energy Service|Transportation|Passenger|Domestic Shipping;bn pkm/yr;;;;;;annual demand for energy services related to passenger transportation in navigation
 700;Energy Service|Transportation|Passenger|Other;bn pkm/yr;;;;;;annual demand for energy services related to passenger transportation (other)
 701;Energy Service|Transportation|Passenger|Railways;bn pkm/yr;;;;;;annual demand for energy services related to passenger transportation in railways
 702;Energy Service|Transportation|Passenger|Road;bn pkm/yr;;;;;;annual demand for energy services related to passenger transportation on roads
