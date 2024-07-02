@@ -1,4 +1,10 @@
 idx;Tier;Category;variable;unit;piam_variable;piam_unit;piam_factor;internal_comment;Comment;Definition;source
+# temporary fix until waste emissions are separated;;;;;;;;;;;
+;;;Emissions|CO2|Energy|Supply;Mt CO2/yr;Emi|CO2|Energy|+|Waste;Mt CO2/yr;0.8;;;;Rx
+;;;Emissions|CO2|Energy|Supply|Other Sector;Mt CO2/yr;Emi|CO2|Energy|+|Waste;Mt CO2/yr;0.8;;;;Rx
+;;;Emissions|CO2|Energy|Demand;Mt CO2/yr;Emi|CO2|Energy|+|Waste;Mt CO2/yr;0.2;;;;Rx
+;;;Emissions|CO2|Energy|Demand|Other Sector;Mt CO2/yr;Emi|CO2|Energy|+|Waste;Mt CO2/yr;0.2;;;;Rx
+#;;;;;;;;;;;
 2;1;agriculture;Agricultural Demand;million t DM/yr;Demand|++|Crops;Mt DM/yr;;;;total demand for food, non-food and feed products (crops and livestock) and bioenergy crops (1st & 2nd generation);M
 2;1;agriculture;Agricultural Demand;million t DM/yr;Demand|Bioenergy|+|Bioenergy crops;Mt DM/yr;;;;total demand for food, non-food and feed products (crops and livestock) and bioenergy crops (1st & 2nd generation);M
 2;1;agriculture;Agricultural Demand;million t DM/yr;Demand|++|Livestock products;Mt DM/yr;;;;total demand for food, non-food and feed products (crops and livestock) and bioenergy crops (1st & 2nd generation);M
@@ -1007,7 +1013,6 @@ idx;Tier;Category;variable;unit;piam_variable;piam_unit;piam_factor;internal_com
 952;1;energy (final);Final Energy|Transportation|Bus|Hybrid|Liquids;EJ/yr;;;;;;final energy consumption of liquid fuels in the transportation sector by Hybrid Bus;
 953;1;energy (final);Final Energy|Transportation|Bus|Hybrid|Gases;EJ/yr;;;;;;final energy consumption of gases in the transportation sector by Hybrid Bus;
 954;1;energy (final);Final Energy|Transportation|Passenger;EJ/yr;FE|Transport|Pass|Pass|w/o Bunkers;EJ/yr;;;;final energy consumed for passenger transportation;T
-955;1;energy (final);Final Energy|Transportation|Freight;EJ/yr;;;;;;final energy consumed for freight transportation;
 954;1;energy (final);Final Energy|Transportation|Passenger;EJ/yr;FE|Transport|Pass|Road|Bus;EJ/yr;;;;final energy consumed for passenger transportation;T
 954;1;energy (final);Final Energy|Transportation|Passenger;EJ/yr;FE|Transport|Pass|Road|LDV;EJ/yr;;;;final energy consumed for passenger transportation;T
 954;1;energy (final);Final Energy|Transportation|Passenger;EJ/yr;FE|Transport|Pass|Rail;EJ/yr;;;;final energy consumed for passenger transportation;T
@@ -1504,12 +1509,12 @@ idx;Tier;Category;variable;unit;piam_variable;piam_unit;piam_factor;internal_com
 1404;1;land cover;Land Cover|Cropland;million ha;Resources|Land Cover|+|Cropland;million ha;;;;total arable land, i.e. land in bioenergy crop, food, and feed/fodder crops, permant crops as well as other arable land (physical area);M
 1405;1;land cover;Land Cover|Forest;million ha;Resources|Land Cover|+|Forest;million ha;;;;managed and unmanaged forest area;M
 1406;1;land cover;Land Cover|Pasture;million ha;Resources|Land Cover|+|Pastures and Rangelands;million ha;;;;pasture land. All categories of pasture land - not only high quality rangeland. Based on FAO definition of permanent meadows and pastures;M
-1407;2;land cover;Land Cover|Cropland|Cereals;million ha;Resources|Land Cover|Cropland|Crops|+|Cereals;million ha;;;;land dedicated to cereal crops: wheat, rice and coarse grains (maize, corn, millet, sorghum, barley, oats, rye);M
-1408;2;land cover;Land Cover|Cropland|Energy Crops;million ha;Resources|Land Cover|Cropland|+|Bioenergy crops;million ha;;;;land dedicated to energy crops (e.g., switchgrass, miscanthus, fast-growing wood species);M
-1409;2;land cover;Land Cover|Cropland|Energy Crops|Irrigated;million ha;Resources|Land Cover|Cropland|Bioenergy crops|irrigated;million ha;;;;irrigated land dedicated to energy crops (e.g., switchgrass, miscanthus, fast-growing wood species);M
-1410;2;land cover;Land Cover|Cropland|Irrigated;million ha;Resources|Land Cover|Cropland|Crops|irrigated;million ha;;;;irrigated arable land, i.e. land in non-forest bioenergy crop, food, and feed/fodder crops, as well as other arable land (cultivated area);M
-1410;2;land cover;Land Cover|Cropland|Irrigated;million ha;Resources|Land Cover|Cropland|Forage|irrigated;million ha;;;;irrigated arable land, i.e. land in non-forest bioenergy crop, food, and feed/fodder crops, as well as other arable land (cultivated area);M
-1410;2;land cover;Land Cover|Cropland|Irrigated;million ha;Resources|Land Cover|Cropland|Bioenergy crops|irrigated;million ha;;;;irrigated arable land, i.e. land in non-forest bioenergy crop, food, and feed/fodder crops, as well as other arable land (cultivated area);M
+1407;2;land cover;Land Cover|Cropland|Cereals;million ha;Resources|Land Cover|Cropland|Croparea|Crops|+|Cereals;million ha;;;;land dedicated to cereal crops: wheat, rice and coarse grains (maize, corn, millet, sorghum, barley, oats, rye);M
+1408;2;land cover;Land Cover|Cropland|Energy Crops;million ha;Resources|Land Cover|Cropland|Croparea|+|Bioenergy crops;million ha;;;;land dedicated to energy crops (e.g., switchgrass, miscanthus, fast-growing wood species);M
+1409;2;land cover;Land Cover|Cropland|Energy Crops|Irrigated;million ha;Resources|Land Cover|Cropland|Croparea|Bioenergy crops|irrigated;million ha;;;;irrigated land dedicated to energy crops (e.g., switchgrass, miscanthus, fast-growing wood species);M
+1410;2;land cover;Land Cover|Cropland|Irrigated;million ha;Resources|Land Cover|Cropland|Croparea|Crops|irrigated;million ha;;;;irrigated arable land, i.e. land in non-forest bioenergy crop, food, and feed/fodder crops, as well as other arable land (cultivated area);M
+1410;2;land cover;Land Cover|Cropland|Irrigated;million ha;Resources|Land Cover|Cropland|Croparea|Forage|irrigated;million ha;;;;irrigated arable land, i.e. land in non-forest bioenergy crop, food, and feed/fodder crops, as well as other arable land (cultivated area);M
+1410;2;land cover;Land Cover|Cropland|Irrigated;million ha;Resources|Land Cover|Cropland|Croparea|Bioenergy crops|irrigated;million ha;;;;irrigated arable land, i.e. land in non-forest bioenergy crop, food, and feed/fodder crops, as well as other arable land (cultivated area);M
 1411;2;land cover;Land Cover|Forest|Afforestation and Reforestation;million ha;Resources|Land Cover|Forest|Managed Forest|+|NPI/NDC;million ha;;;;Area for afforestation and reforestation;M
 1411;2;land cover;Land Cover|Forest|Afforestation and Reforestation;million ha;Resources|Land Cover|Forest|Managed Forest|+|Afforestation;million ha;;;;Area for afforestation and reforestation;M
 1412;2;land cover;Land Cover|Forest|Forestry|Harvested Area;million ha;;;;;;Forest area harvested;
@@ -1706,9 +1711,9 @@ idx;Tier;Category;variable;unit;piam_variable;piam_unit;piam_factor;internal_com
 1601;1;water (agriculture);Water Withdrawal|Livestock;km3/yr;;;;;;water withdrawals for livestock;
 1602;2;water (agriculture);Improvement|Efficiency|Irrigation;%/yr;;;;;;improvements in irrigation water use efficiency per year;
 1603;2;water (agriculture);Land Cover|Cropland|Double-cropped;million ha;;;;;;area of land that is double-cropped (twice in a year);
-1604;2;water (agriculture);Land Cover|Cropland|Rainfed;million ha;Resources|Land Cover|Cropland|Crops|rainfed;million ha;;;;area of land that is rain-fed;M
-1604;2;water (agriculture);Land Cover|Cropland|Rainfed;million ha;Resources|Land Cover|Cropland|Forage|rainfed;million ha;;;;area of land that is rain-fed;M
-1604;2;water (agriculture);Land Cover|Cropland|Rainfed;million ha;Resources|Land Cover|Cropland|Bioenergy crops|rainfed;million ha;;;;area of land that is rain-fed;M
+1604;2;water (agriculture);Land Cover|Cropland|Rainfed;million ha;Resources|Land Cover|Cropland|Croparea|Crops|rainfed;million ha;;;;area of land that is rain-fed;M
+1604;2;water (agriculture);Land Cover|Cropland|Rainfed;million ha;Resources|Land Cover|Cropland|Croparea|Forage|rainfed;million ha;;;;area of land that is rain-fed;M
+1604;2;water (agriculture);Land Cover|Cropland|Rainfed;million ha;Resources|Land Cover|Cropland|Croparea|Bioenergy crops|rainfed;million ha;;;;area of land that is rain-fed;M
 1605;2;water (agriculture);Land Cover|Water Ecosystems|Forests;million ha;;;;;;Land-use coverage of water-related ecosystem: forests;
 1606;2;water (agriculture);Land Cover|Water Ecosystems|Glaciers;million ha;;;;;;Land-use coverage of water-related ecosystem: glaciers;
 1607;2;water (agriculture);Land Cover|Water Ecosystems|Lakes;million ha;;;;;;Land-use coverage of water-related ecosystem: lakes;
