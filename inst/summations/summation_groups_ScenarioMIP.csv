@@ -1,0 +1,173 @@
+"";"parent";"child";"factor"
+"1";"Emissions|BC";"Emissions|BC|AFOLU";1
+"2";"Emissions|BC";"Emissions|BC|Energy";1
+"3";"Emissions|BC";"Emissions|BC|Industrial Processes";1
+"4";"Emissions|BC";"Emissions|BC|Waste";1
+"5";"Emissions|BC";"Emissions|BC|Capture and Removal";1
+"6";"Emissions|BC";"Emissions|BC|Other";1
+"7";"Emissions|C2F6";"Emissions|C2F6|AFOLU";1
+"8";"Emissions|C2F6";"Emissions|C2F6|Energy";1
+"9";"Emissions|C2F6";"Emissions|C2F6|Industrial Processes";1
+"10";"Emissions|C2F6";"Emissions|C2F6|Waste";1
+"11";"Emissions|C2F6";"Emissions|C2F6|Capture and Removal";1
+"12";"Emissions|C2F6";"Emissions|C2F6|Other";1
+"13";"Emissions|C6F14";"Emissions|C6F14|AFOLU";1
+"14";"Emissions|C6F14";"Emissions|C6F14|Energy";1
+"15";"Emissions|C6F14";"Emissions|C6F14|Industrial Processes";1
+"16";"Emissions|C6F14";"Emissions|C6F14|Waste";1
+"17";"Emissions|C6F14";"Emissions|C6F14|Capture and Removal";1
+"18";"Emissions|C6F14";"Emissions|C6F14|Other";1
+"19";"Emissions|CF4";"Emissions|CF4|AFOLU";1
+"20";"Emissions|CF4";"Emissions|CF4|Energy";1
+"21";"Emissions|CF4";"Emissions|CF4|Industrial Processes";1
+"22";"Emissions|CF4";"Emissions|CF4|Waste";1
+"23";"Emissions|CF4";"Emissions|CF4|Capture and Removal";1
+"24";"Emissions|CF4";"Emissions|CF4|Other";1
+"25";"Emissions|CFC";"Emissions|CFC|AFOLU";1
+"26";"Emissions|CFC";"Emissions|CFC|Energy";1
+"27";"Emissions|CFC";"Emissions|CFC|Industrial Processes";1
+"28";"Emissions|CFC";"Emissions|CFC|Waste";1
+"29";"Emissions|CFC";"Emissions|CFC|Capture and Removal";1
+"30";"Emissions|CFC";"Emissions|CFC|Other";1
+"31";"Emissions|CH4";"Emissions|CH4|AFOLU";1
+"32";"Emissions|CH4";"Emissions|CH4|Energy";1
+"33";"Emissions|CH4";"Emissions|CH4|Industrial Processes";1
+"34";"Emissions|CH4";"Emissions|CH4|Waste";1
+"35";"Emissions|CH4";"Emissions|CH4|Capture and Removal";1
+"36";"Emissions|CH4";"Emissions|CH4|Other";1
+"37";"Emissions|CH4|Energy and Industrial Processes";"Emissions|CH4|Energy";1
+"38";"Emissions|CH4|Energy and Industrial Processes";"Emissions|CH4|Industrial Processes";1
+"39";"Emissions|CO";"Emissions|CO|AFOLU";1
+"40";"Emissions|CO";"Emissions|CO|Energy";1
+"41";"Emissions|CO";"Emissions|CO|Industrial Processes";1
+"42";"Emissions|CO";"Emissions|CO|Waste";1
+"43";"Emissions|CO";"Emissions|CO|Capture and Removal";1
+"44";"Emissions|CO";"Emissions|CO|Other";1
+"45";"Emissions|CO2";"Emissions|CO2|AFOLU";1
+"46";"Emissions|CO2";"Emissions|CO2|Energy";1
+"47";"Emissions|CO2";"Emissions|CO2|Industrial Processes";1
+"48";"Emissions|CO2";"Emissions|CO2|Waste";1
+"49";"Emissions|CO2";"Emissions|CO2|Capture and Removal";1
+"50";"Emissions|CO2";"Emissions|CO2|Other";1
+"51";"Emissions|CO2|Energy and Industrial Processes";"Emissions|CO2|Energy";1
+"52";"Emissions|CO2|Energy and Industrial Processes";"Emissions|CO2|Industrial Processes";1
+"53";"Emissions|F-Gases";"Emissions|F-Gases|AFOLU";1
+"54";"Emissions|F-Gases";"Emissions|F-Gases|Energy";1
+"55";"Emissions|F-Gases";"Emissions|F-Gases|Industrial Processes";1
+"56";"Emissions|F-Gases";"Emissions|F-Gases|Waste";1
+"57";"Emissions|F-Gases";"Emissions|F-Gases|Capture and Removal";1
+"58";"Emissions|F-Gases";"Emissions|F-Gases|Other";1
+"59";"Emissions|HFC";"Emissions|HFC|AFOLU";1
+"60";"Emissions|HFC";"Emissions|HFC|Energy";1
+"61";"Emissions|HFC";"Emissions|HFC|Industrial Processes";1
+"62";"Emissions|HFC";"Emissions|HFC|Waste";1
+"63";"Emissions|HFC";"Emissions|HFC|Capture and Removal";1
+"64";"Emissions|HFC";"Emissions|HFC|Other";1
+"65";"Emissions|HFC|HFC125";"Emissions|HFC|HFC125|AFOLU";1
+"66";"Emissions|HFC|HFC125";"Emissions|HFC|HFC125|Energy";1
+"67";"Emissions|HFC|HFC125";"Emissions|HFC|HFC125|Industrial Processes";1
+"68";"Emissions|HFC|HFC125";"Emissions|HFC|HFC125|Waste";1
+"69";"Emissions|HFC|HFC125";"Emissions|HFC|HFC125|Capture and Removal";1
+"70";"Emissions|HFC|HFC125";"Emissions|HFC|HFC125|Other";1
+"71";"Emissions|HFC|HFC134a";"Emissions|HFC|HFC134a|AFOLU";1
+"72";"Emissions|HFC|HFC134a";"Emissions|HFC|HFC134a|Energy";1
+"73";"Emissions|HFC|HFC134a";"Emissions|HFC|HFC134a|Industrial Processes";1
+"74";"Emissions|HFC|HFC134a";"Emissions|HFC|HFC134a|Waste";1
+"75";"Emissions|HFC|HFC134a";"Emissions|HFC|HFC134a|Capture and Removal";1
+"76";"Emissions|HFC|HFC134a";"Emissions|HFC|HFC134a|Other";1
+"77";"Emissions|HFC|HFC143a";"Emissions|HFC|HFC143a|AFOLU";1
+"78";"Emissions|HFC|HFC143a";"Emissions|HFC|HFC143a|Energy";1
+"79";"Emissions|HFC|HFC143a";"Emissions|HFC|HFC143a|Industrial Processes";1
+"80";"Emissions|HFC|HFC143a";"Emissions|HFC|HFC143a|Waste";1
+"81";"Emissions|HFC|HFC143a";"Emissions|HFC|HFC143a|Capture and Removal";1
+"82";"Emissions|HFC|HFC143a";"Emissions|HFC|HFC143a|Other";1
+"83";"Emissions|HFC|HFC227ea";"Emissions|HFC|HFC227ea|AFOLU";1
+"84";"Emissions|HFC|HFC227ea";"Emissions|HFC|HFC227ea|Energy";1
+"85";"Emissions|HFC|HFC227ea";"Emissions|HFC|HFC227ea|Industrial Processes";1
+"86";"Emissions|HFC|HFC227ea";"Emissions|HFC|HFC227ea|Waste";1
+"87";"Emissions|HFC|HFC227ea";"Emissions|HFC|HFC227ea|Capture and Removal";1
+"88";"Emissions|HFC|HFC227ea";"Emissions|HFC|HFC227ea|Other";1
+"89";"Emissions|HFC|HFC23";"Emissions|HFC|HFC23|AFOLU";1
+"90";"Emissions|HFC|HFC23";"Emissions|HFC|HFC23|Energy";1
+"91";"Emissions|HFC|HFC23";"Emissions|HFC|HFC23|Industrial Processes";1
+"92";"Emissions|HFC|HFC23";"Emissions|HFC|HFC23|Waste";1
+"93";"Emissions|HFC|HFC23";"Emissions|HFC|HFC23|Capture and Removal";1
+"94";"Emissions|HFC|HFC23";"Emissions|HFC|HFC23|Other";1
+"95";"Emissions|HFC|HFC245fa";"Emissions|HFC|HFC245fa|AFOLU";1
+"96";"Emissions|HFC|HFC245fa";"Emissions|HFC|HFC245fa|Energy";1
+"97";"Emissions|HFC|HFC245fa";"Emissions|HFC|HFC245fa|Industrial Processes";1
+"98";"Emissions|HFC|HFC245fa";"Emissions|HFC|HFC245fa|Waste";1
+"99";"Emissions|HFC|HFC245fa";"Emissions|HFC|HFC245fa|Capture and Removal";1
+"100";"Emissions|HFC|HFC245fa";"Emissions|HFC|HFC245fa|Other";1
+"101";"Emissions|HFC|HFC32";"Emissions|HFC|HFC32|AFOLU";1
+"102";"Emissions|HFC|HFC32";"Emissions|HFC|HFC32|Energy";1
+"103";"Emissions|HFC|HFC32";"Emissions|HFC|HFC32|Industrial Processes";1
+"104";"Emissions|HFC|HFC32";"Emissions|HFC|HFC32|Waste";1
+"105";"Emissions|HFC|HFC32";"Emissions|HFC|HFC32|Capture and Removal";1
+"106";"Emissions|HFC|HFC32";"Emissions|HFC|HFC32|Other";1
+"107";"Emissions|HFC|HFC43-10";"Emissions|HFC|HFC43-10|AFOLU";1
+"108";"Emissions|HFC|HFC43-10";"Emissions|HFC|HFC43-10|Energy";1
+"109";"Emissions|HFC|HFC43-10";"Emissions|HFC|HFC43-10|Industrial Processes";1
+"110";"Emissions|HFC|HFC43-10";"Emissions|HFC|HFC43-10|Waste";1
+"111";"Emissions|HFC|HFC43-10";"Emissions|HFC|HFC43-10|Capture and Removal";1
+"112";"Emissions|HFC|HFC43-10";"Emissions|HFC|HFC43-10|Other";1
+"113";"Emissions|Kyoto Gases";"Emissions|Kyoto Gases|AFOLU";1
+"114";"Emissions|Kyoto Gases";"Emissions|Kyoto Gases|Energy";1
+"115";"Emissions|Kyoto Gases";"Emissions|Kyoto Gases|Industrial Processes";1
+"116";"Emissions|Kyoto Gases";"Emissions|Kyoto Gases|Waste";1
+"117";"Emissions|Kyoto Gases";"Emissions|Kyoto Gases|Capture and Removal";1
+"118";"Emissions|Kyoto Gases";"Emissions|Kyoto Gases|Other";1
+"119";"Emissions|Kyoto Gases|Energy and Industrial Processes";"Emissions|Kyoto Gases|Energy";1
+"120";"Emissions|Kyoto Gases|Energy and Industrial Processes";"Emissions|Kyoto Gases|Industrial Processes";1
+"121";"Emissions|N2O";"Emissions|N2O|AFOLU";1
+"122";"Emissions|N2O";"Emissions|N2O|Energy";1
+"123";"Emissions|N2O";"Emissions|N2O|Industrial Processes";1
+"124";"Emissions|N2O";"Emissions|N2O|Waste";1
+"125";"Emissions|N2O";"Emissions|N2O|Capture and Removal";1
+"126";"Emissions|N2O";"Emissions|N2O|Other";1
+"127";"Emissions|N2O|Energy and Industrial Processes";"Emissions|N2O|Energy";1
+"128";"Emissions|N2O|Energy and Industrial Processes";"Emissions|N2O|Industrial Processes";1
+"129";"Emissions|NH3";"Emissions|NH3|AFOLU";1
+"130";"Emissions|NH3";"Emissions|NH3|Energy";1
+"131";"Emissions|NH3";"Emissions|NH3|Industrial Processes";1
+"132";"Emissions|NH3";"Emissions|NH3|Waste";1
+"133";"Emissions|NH3";"Emissions|NH3|Capture and Removal";1
+"134";"Emissions|NH3";"Emissions|NH3|Other";1
+"135";"Emissions|NOx";"Emissions|NOx|AFOLU";1
+"136";"Emissions|NOx";"Emissions|NOx|Energy";1
+"137";"Emissions|NOx";"Emissions|NOx|Industrial Processes";1
+"138";"Emissions|NOx";"Emissions|NOx|Waste";1
+"139";"Emissions|NOx";"Emissions|NOx|Capture and Removal";1
+"140";"Emissions|NOx";"Emissions|NOx|Other";1
+"141";"Emissions|OC";"Emissions|OC|AFOLU";1
+"142";"Emissions|OC";"Emissions|OC|Energy";1
+"143";"Emissions|OC";"Emissions|OC|Industrial Processes";1
+"144";"Emissions|OC";"Emissions|OC|Waste";1
+"145";"Emissions|OC";"Emissions|OC|Capture and Removal";1
+"146";"Emissions|OC";"Emissions|OC|Other";1
+"147";"Emissions|PFC";"Emissions|PFC|AFOLU";1
+"148";"Emissions|PFC";"Emissions|PFC|Energy";1
+"149";"Emissions|PFC";"Emissions|PFC|Industrial Processes";1
+"150";"Emissions|PFC";"Emissions|PFC|Waste";1
+"151";"Emissions|PFC";"Emissions|PFC|Capture and Removal";1
+"152";"Emissions|PFC";"Emissions|PFC|Other";1
+"153";"Emissions|SF6";"Emissions|SF6|AFOLU";1
+"154";"Emissions|SF6";"Emissions|SF6|Energy";1
+"155";"Emissions|SF6";"Emissions|SF6|Industrial Processes";1
+"156";"Emissions|SF6";"Emissions|SF6|Waste";1
+"157";"Emissions|SF6";"Emissions|SF6|Capture and Removal";1
+"158";"Emissions|SF6";"Emissions|SF6|Other";1
+"159";"Emissions|Sulfur";"Emissions|Sulfur|AFOLU";1
+"160";"Emissions|Sulfur";"Emissions|Sulfur|Energy";1
+"161";"Emissions|Sulfur";"Emissions|Sulfur|Industrial Processes";1
+"162";"Emissions|Sulfur";"Emissions|Sulfur|Waste";1
+"163";"Emissions|Sulfur";"Emissions|Sulfur|Capture and Removal";1
+"164";"Emissions|Sulfur";"Emissions|Sulfur|Other";1
+"165";"Emissions|VOC";"Emissions|VOC|AFOLU";1
+"166";"Emissions|VOC";"Emissions|VOC|Energy";1
+"167";"Emissions|VOC";"Emissions|VOC|Industrial Processes";1
+"168";"Emissions|VOC";"Emissions|VOC|Waste";1
+"169";"Emissions|VOC";"Emissions|VOC|Capture and Removal";1
+"170";"Emissions|VOC";"Emissions|VOC|Other";1
+"171";"Gross Emissions|CO2|Energy and Industrial Processes";"Gross Emissions|CO2|Energy";1
+"172";"Gross Emissions|CO2|Energy and Industrial Processes";"Gross Emissions|CO2|Industrial Processes";1
