@@ -1,0 +1,173 @@
+parent;child;factor
+Emissions|BC;Emissions|BC|AFOLU;1
+Emissions|BC;Emissions|BC|Energy;1
+Emissions|BC;Emissions|BC|Industrial Processes;1
+Emissions|BC;Emissions|BC|Waste;1
+Emissions|BC;Emissions|BC|Capture and Removal;1
+Emissions|BC;Emissions|BC|Other;1
+Emissions|C2F6;Emissions|C2F6|AFOLU;1
+Emissions|C2F6;Emissions|C2F6|Energy;1
+Emissions|C2F6;Emissions|C2F6|Industrial Processes;1
+Emissions|C2F6;Emissions|C2F6|Waste;1
+Emissions|C2F6;Emissions|C2F6|Capture and Removal;1
+Emissions|C2F6;Emissions|C2F6|Other;1
+Emissions|C6F14;Emissions|C6F14|AFOLU;1
+Emissions|C6F14;Emissions|C6F14|Energy;1
+Emissions|C6F14;Emissions|C6F14|Industrial Processes;1
+Emissions|C6F14;Emissions|C6F14|Waste;1
+Emissions|C6F14;Emissions|C6F14|Capture and Removal;1
+Emissions|C6F14;Emissions|C6F14|Other;1
+Emissions|CF4;Emissions|CF4|AFOLU;1
+Emissions|CF4;Emissions|CF4|Energy;1
+Emissions|CF4;Emissions|CF4|Industrial Processes;1
+Emissions|CF4;Emissions|CF4|Waste;1
+Emissions|CF4;Emissions|CF4|Capture and Removal;1
+Emissions|CF4;Emissions|CF4|Other;1
+Emissions|CFC;Emissions|CFC|AFOLU;1
+Emissions|CFC;Emissions|CFC|Energy;1
+Emissions|CFC;Emissions|CFC|Industrial Processes;1
+Emissions|CFC;Emissions|CFC|Waste;1
+Emissions|CFC;Emissions|CFC|Capture and Removal;1
+Emissions|CFC;Emissions|CFC|Other;1
+Emissions|CH4;Emissions|CH4|AFOLU;1
+Emissions|CH4;Emissions|CH4|Energy;1
+Emissions|CH4;Emissions|CH4|Industrial Processes;1
+Emissions|CH4;Emissions|CH4|Waste;1
+Emissions|CH4;Emissions|CH4|Capture and Removal;1
+Emissions|CH4;Emissions|CH4|Other;1
+Emissions|CH4|Energy and Industrial Processes;Emissions|CH4|Energy;1
+Emissions|CH4|Energy and Industrial Processes;Emissions|CH4|Industrial Processes;1
+Emissions|CO;Emissions|CO|AFOLU;1
+Emissions|CO;Emissions|CO|Energy;1
+Emissions|CO;Emissions|CO|Industrial Processes;1
+Emissions|CO;Emissions|CO|Waste;1
+Emissions|CO;Emissions|CO|Capture and Removal;1
+Emissions|CO;Emissions|CO|Other;1
+Emissions|CO2;Emissions|CO2|AFOLU;1
+Emissions|CO2;Emissions|CO2|Energy;1
+Emissions|CO2;Emissions|CO2|Industrial Processes;1
+Emissions|CO2;Emissions|CO2|Waste;1
+Emissions|CO2;Emissions|CO2|Capture and Removal;1
+Emissions|CO2;Emissions|CO2|Other;1
+Emissions|CO2|Energy and Industrial Processes;Emissions|CO2|Energy;1
+Emissions|CO2|Energy and Industrial Processes;Emissions|CO2|Industrial Processes;1
+Emissions|F-Gases;Emissions|F-Gases|AFOLU;1
+Emissions|F-Gases;Emissions|F-Gases|Energy;1
+Emissions|F-Gases;Emissions|F-Gases|Industrial Processes;1
+Emissions|F-Gases;Emissions|F-Gases|Waste;1
+Emissions|F-Gases;Emissions|F-Gases|Capture and Removal;1
+Emissions|F-Gases;Emissions|F-Gases|Other;1
+Emissions|HFC;Emissions|HFC|AFOLU;1
+Emissions|HFC;Emissions|HFC|Energy;1
+Emissions|HFC;Emissions|HFC|Industrial Processes;1
+Emissions|HFC;Emissions|HFC|Waste;1
+Emissions|HFC;Emissions|HFC|Capture and Removal;1
+Emissions|HFC;Emissions|HFC|Other;1
+Emissions|HFC|HFC125;Emissions|HFC|HFC125|AFOLU;1
+Emissions|HFC|HFC125;Emissions|HFC|HFC125|Energy;1
+Emissions|HFC|HFC125;Emissions|HFC|HFC125|Industrial Processes;1
+Emissions|HFC|HFC125;Emissions|HFC|HFC125|Waste;1
+Emissions|HFC|HFC125;Emissions|HFC|HFC125|Capture and Removal;1
+Emissions|HFC|HFC125;Emissions|HFC|HFC125|Other;1
+Emissions|HFC|HFC134a;Emissions|HFC|HFC134a|AFOLU;1
+Emissions|HFC|HFC134a;Emissions|HFC|HFC134a|Energy;1
+Emissions|HFC|HFC134a;Emissions|HFC|HFC134a|Industrial Processes;1
+Emissions|HFC|HFC134a;Emissions|HFC|HFC134a|Waste;1
+Emissions|HFC|HFC134a;Emissions|HFC|HFC134a|Capture and Removal;1
+Emissions|HFC|HFC134a;Emissions|HFC|HFC134a|Other;1
+Emissions|HFC|HFC143a;Emissions|HFC|HFC143a|AFOLU;1
+Emissions|HFC|HFC143a;Emissions|HFC|HFC143a|Energy;1
+Emissions|HFC|HFC143a;Emissions|HFC|HFC143a|Industrial Processes;1
+Emissions|HFC|HFC143a;Emissions|HFC|HFC143a|Waste;1
+Emissions|HFC|HFC143a;Emissions|HFC|HFC143a|Capture and Removal;1
+Emissions|HFC|HFC143a;Emissions|HFC|HFC143a|Other;1
+Emissions|HFC|HFC227ea;Emissions|HFC|HFC227ea|AFOLU;1
+Emissions|HFC|HFC227ea;Emissions|HFC|HFC227ea|Energy;1
+Emissions|HFC|HFC227ea;Emissions|HFC|HFC227ea|Industrial Processes;1
+Emissions|HFC|HFC227ea;Emissions|HFC|HFC227ea|Waste;1
+Emissions|HFC|HFC227ea;Emissions|HFC|HFC227ea|Capture and Removal;1
+Emissions|HFC|HFC227ea;Emissions|HFC|HFC227ea|Other;1
+Emissions|HFC|HFC23;Emissions|HFC|HFC23|AFOLU;1
+Emissions|HFC|HFC23;Emissions|HFC|HFC23|Energy;1
+Emissions|HFC|HFC23;Emissions|HFC|HFC23|Industrial Processes;1
+Emissions|HFC|HFC23;Emissions|HFC|HFC23|Waste;1
+Emissions|HFC|HFC23;Emissions|HFC|HFC23|Capture and Removal;1
+Emissions|HFC|HFC23;Emissions|HFC|HFC23|Other;1
+Emissions|HFC|HFC245fa;Emissions|HFC|HFC245fa|AFOLU;1
+Emissions|HFC|HFC245fa;Emissions|HFC|HFC245fa|Energy;1
+Emissions|HFC|HFC245fa;Emissions|HFC|HFC245fa|Industrial Processes;1
+Emissions|HFC|HFC245fa;Emissions|HFC|HFC245fa|Waste;1
+Emissions|HFC|HFC245fa;Emissions|HFC|HFC245fa|Capture and Removal;1
+Emissions|HFC|HFC245fa;Emissions|HFC|HFC245fa|Other;1
+Emissions|HFC|HFC32;Emissions|HFC|HFC32|AFOLU;1
+Emissions|HFC|HFC32;Emissions|HFC|HFC32|Energy;1
+Emissions|HFC|HFC32;Emissions|HFC|HFC32|Industrial Processes;1
+Emissions|HFC|HFC32;Emissions|HFC|HFC32|Waste;1
+Emissions|HFC|HFC32;Emissions|HFC|HFC32|Capture and Removal;1
+Emissions|HFC|HFC32;Emissions|HFC|HFC32|Other;1
+Emissions|HFC|HFC43-10;Emissions|HFC|HFC43-10|AFOLU;1
+Emissions|HFC|HFC43-10;Emissions|HFC|HFC43-10|Energy;1
+Emissions|HFC|HFC43-10;Emissions|HFC|HFC43-10|Industrial Processes;1
+Emissions|HFC|HFC43-10;Emissions|HFC|HFC43-10|Waste;1
+Emissions|HFC|HFC43-10;Emissions|HFC|HFC43-10|Capture and Removal;1
+Emissions|HFC|HFC43-10;Emissions|HFC|HFC43-10|Other;1
+Emissions|Kyoto Gases;Emissions|Kyoto Gases|AFOLU;1
+Emissions|Kyoto Gases;Emissions|Kyoto Gases|Energy;1
+Emissions|Kyoto Gases;Emissions|Kyoto Gases|Industrial Processes;1
+Emissions|Kyoto Gases;Emissions|Kyoto Gases|Waste;1
+Emissions|Kyoto Gases;Emissions|Kyoto Gases|Capture and Removal;1
+Emissions|Kyoto Gases;Emissions|Kyoto Gases|Other;1
+Emissions|Kyoto Gases|Energy and Industrial Processes;Emissions|Kyoto Gases|Energy;1
+Emissions|Kyoto Gases|Energy and Industrial Processes;Emissions|Kyoto Gases|Industrial Processes;1
+Emissions|N2O;Emissions|N2O|AFOLU;1
+Emissions|N2O;Emissions|N2O|Energy;1
+Emissions|N2O;Emissions|N2O|Industrial Processes;1
+Emissions|N2O;Emissions|N2O|Waste;1
+Emissions|N2O;Emissions|N2O|Capture and Removal;1
+Emissions|N2O;Emissions|N2O|Other;1
+Emissions|N2O|Energy and Industrial Processes;Emissions|N2O|Energy;1
+Emissions|N2O|Energy and Industrial Processes;Emissions|N2O|Industrial Processes;1
+Emissions|NH3;Emissions|NH3|AFOLU;1
+Emissions|NH3;Emissions|NH3|Energy;1
+Emissions|NH3;Emissions|NH3|Industrial Processes;1
+Emissions|NH3;Emissions|NH3|Waste;1
+Emissions|NH3;Emissions|NH3|Capture and Removal;1
+Emissions|NH3;Emissions|NH3|Other;1
+Emissions|NOx;Emissions|NOx|AFOLU;1
+Emissions|NOx;Emissions|NOx|Energy;1
+Emissions|NOx;Emissions|NOx|Industrial Processes;1
+Emissions|NOx;Emissions|NOx|Waste;1
+Emissions|NOx;Emissions|NOx|Capture and Removal;1
+Emissions|NOx;Emissions|NOx|Other;1
+Emissions|OC;Emissions|OC|AFOLU;1
+Emissions|OC;Emissions|OC|Energy;1
+Emissions|OC;Emissions|OC|Industrial Processes;1
+Emissions|OC;Emissions|OC|Waste;1
+Emissions|OC;Emissions|OC|Capture and Removal;1
+Emissions|OC;Emissions|OC|Other;1
+Emissions|PFC;Emissions|PFC|AFOLU;1
+Emissions|PFC;Emissions|PFC|Energy;1
+Emissions|PFC;Emissions|PFC|Industrial Processes;1
+Emissions|PFC;Emissions|PFC|Waste;1
+Emissions|PFC;Emissions|PFC|Capture and Removal;1
+Emissions|PFC;Emissions|PFC|Other;1
+Emissions|SF6;Emissions|SF6|AFOLU;1
+Emissions|SF6;Emissions|SF6|Energy;1
+Emissions|SF6;Emissions|SF6|Industrial Processes;1
+Emissions|SF6;Emissions|SF6|Waste;1
+Emissions|SF6;Emissions|SF6|Capture and Removal;1
+Emissions|SF6;Emissions|SF6|Other;1
+Emissions|Sulfur;Emissions|Sulfur|AFOLU;1
+Emissions|Sulfur;Emissions|Sulfur|Energy;1
+Emissions|Sulfur;Emissions|Sulfur|Industrial Processes;1
+Emissions|Sulfur;Emissions|Sulfur|Waste;1
+Emissions|Sulfur;Emissions|Sulfur|Capture and Removal;1
+Emissions|Sulfur;Emissions|Sulfur|Other;1
+Emissions|VOC;Emissions|VOC|AFOLU;1
+Emissions|VOC;Emissions|VOC|Energy;1
+Emissions|VOC;Emissions|VOC|Industrial Processes;1
+Emissions|VOC;Emissions|VOC|Waste;1
+Emissions|VOC;Emissions|VOC|Capture and Removal;1
+Emissions|VOC;Emissions|VOC|Other;1
+Gross Emissions|CO2|Energy and Industrial Processes;Gross Emissions|CO2|Energy;1
+Gross Emissions|CO2|Energy and Industrial Processes;Gross Emissions|CO2|Industrial Processes;1
