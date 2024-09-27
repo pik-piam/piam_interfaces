@@ -9,6 +9,9 @@ checkMissingVars(mifdata, mapping = TRUE, sources = TRUE)
 \arguments{
 \item{mifdata}{data that can be read with as.quitte}
 
+\item{mapping}{name of the project of requested mappings
+such as c('AR6', 'AR6_NGFS') or 'mapping.csv'. Use TRUE for all mappings.}
+
 \item{sources}{model abbreviation(s) used in 'source' column.
 R = REMIND, M = MAgPIE, T = EDGE-T, B = Brick, C = Climate/MAGICC, TRUE = all}
 }
