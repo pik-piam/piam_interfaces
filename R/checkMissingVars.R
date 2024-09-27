@@ -3,13 +3,12 @@
 #' @md
 #' @author Oliver Richters
 #' @param mifdata data that can be read with as.quitte
-#' @param mapping list of mapping that can be passed to getMappingVariables
-#' @param sources source than can be passed to getMappingVariables
+#' @inheritParams getMappingVariables
 #' @importFrom piamutils deletePlus
 #' @importFrom quitte as.quitte
 #' @return an invisible vector with missing variables
 #' @export
-checkMissingVars <- function(mifdata, mapping, sources = TRUE) {
+checkMissingVars <- function(mifdata, mapping = TRUE, sources = TRUE) {
   mifdata <- as.quitte(mifdata)
   mappingVariables <- deletePlus(getMappingVariables(mapping, sources))
   computedVariables <- unique(paste0(deletePlus(mifdata$variable), " (", gsub("^$", "unitless", mifdata$unit), ")"))

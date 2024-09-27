@@ -4,14 +4,13 @@
 \alias{checkMissingVars}
 \title{Check whether all variables required by mapping are present in mifdata for given source}
 \usage{
-checkMissingVars(mifdata, mapping, sources = TRUE)
+checkMissingVars(mifdata, mapping = TRUE, sources = TRUE)
 }
 \arguments{
 \item{mifdata}{data that can be read with as.quitte}
 
-\item{mapping}{list of mapping that can be passed to getMappingVariables}
-
-\item{sources}{source than can be passed to getMappingVariables}
+\item{sources}{model abbreviation(s) used in 'source' column.
+R = REMIND, M = MAgPIE, T = EDGE-T, B = Brick, C = Climate/MAGICC, TRUE = all}
 }
 \value{
 an invisible vector with missing variables
