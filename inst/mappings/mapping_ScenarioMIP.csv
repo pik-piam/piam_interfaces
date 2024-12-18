@@ -522,7 +522,7 @@ Capital Cost|Solids|Coal|*;USD_2010/kW;;Capital cost of a newly installed plant 
 Capital Formation;billion USD_2010/yr;1;Net additions to the physical capital stock;;;Investments;billion US$2017/yr;0.9096;mapping taken from NAVIGATE, NAVIGATE category: economy;R
 Capital Stock;billion USD_2010/yr;;Macroeconomic capital stock;;;;;;;
 Carbon Capture;Mt CO2/yr;1;Total amount of carbon dioxide (CO2) captured either from the atmosphere, directly from oceans, or from point sources as energy use in supply and demand sectors (IPCC category 1A, 1B) or industrial processes (IPCC categories 2A, B, C, E);;;Carbon Management|Carbon Capture;Mt CO2/yr;;;R
-Carbon Capture|Direct Air Cmakapture;Mt CO2/yr;1;Captured carbon dioxide (CO2) from direct air capture;Values should be reported as positive numbers.;;Carbon Management|Carbon Capture|+|DAC;Mt CO2/yr;;;R
+Carbon Capture|Direct Air Capture;Mt CO2/yr;1;Captured carbon dioxide (CO2) from direct air capture;Values should be reported as positive numbers.;;Carbon Management|Carbon Capture|+|DAC;Mt CO2/yr;;;R
 Carbon Capture|Direct Ocean Capture;Mt CO2/yr;1;Captured carbon dioxide (CO2) from direct ocean capture;Values should be reported as positive numbers.;;;;;;
 Carbon Capture|Energy;Mt CO2/yr;1;Captured carbon dioxide (CO2) from energy use in supply and demand sectors (IPCC category 1A, 1B);Values should be reported as positive numbers.;;Carbon Management|Carbon Capture|+|Biomass|Pe2Se;Mt CO2/yr;;;R
 Carbon Capture|Energy;Mt CO2/yr;1;Captured carbon dioxide (CO2) from energy use in supply and demand sectors (IPCC category 1A, 1B);Values should be reported as positive numbers.;;Carbon Management|Carbon Capture|+|Fossil|Pe2Se;Mt CO2/yr;;;R
