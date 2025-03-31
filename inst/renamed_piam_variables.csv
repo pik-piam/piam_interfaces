@@ -225,3 +225,8 @@ Emi|GHG|w/o Bunkers|LULUCF national accounting           ;Emi|GHG|LULUCF nationa
 Emi|GHG|w/o Bunkers|Outside ETS and ESR                  ;Emi|GHG|Outside ETS and ESR
 Emi|GHG|w/o Bunkers|Outside ETS and ESR|Transport        ;Emi|GHG|Outside ETS and ESR|Transport
 Emi|GHG|w/o Bunkers|w/o Land-Use Change                  ;Emi|GHG|w/o Land-Use Change
+#
+# https://github.com/pik-piam/remind2/pull/714
+Tech|Liquids|Biomass|Biodiesel|Capital Costs;Tech|Liquids|Biomass|Biodiesel|w/o CC|Capital Costs
+SE|Liquids|Biomass|Cellulosic|+|Energy Crops;SE|Liquids|Biomass|Energy Crops
+SE|Liquids|Biomass|Cellulosic|+|Residues;SE|Liquids|Biomass|Residues
