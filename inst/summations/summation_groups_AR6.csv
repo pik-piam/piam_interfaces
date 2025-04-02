@@ -47,7 +47,7 @@ Carbon Sequestration|Feedstocks;Carbon Sequestration|Feedstocks|Fossil;1
 Carbon Sequestration|Land Use;Carbon Sequestration|Land Use|Afforestation;1
 Carbon Sequestration|Land Use;Carbon Sequestration|Land Use|Biochar;1
 Carbon Sequestration|Land Use;Carbon Sequestration|Land Use|Other;1
-Carbon Sequestration|Land Use;Carbon Sequestration|Land Use|S Carbon Management;1
+Carbon Sequestration|Land Use;Carbon Sequestration|Land Use|Soil Carbon Management;1
 Agricultural Production|Energy;Agricultural Production|Energy|Crops;1
 Agricultural Production|Energy;Agricultural Production|Energy|Residues;1
 Agricultural Production|Non-Energy;Agricultural Production|Non-Energy|Crops;1
@@ -696,7 +696,7 @@ Capacity|Electricity;Capacity|Electricity|Geothermal;1
 Capacity|Electricity;Capacity|Electricity|Hydro;1
 Capacity|Electricity;Capacity|Electricity|Nuclear;1
 Capacity|Electricity;Capacity|Electricity|Ocean;1
-Capacity|Electricity;Capacity|Electricity|;1
+Capacity|Electricity;Capacity|Electricity|Oil;1
 Capacity|Electricity;Capacity|Electricity|Other;1
 Capacity|Electricity;Capacity|Electricity|Solar;1
 Capacity|Electricity;Capacity|Electricity|Wind;1
