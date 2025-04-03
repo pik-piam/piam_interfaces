@@ -19,7 +19,6 @@ test_that("checkSummations works", {
 
 
   for (summationFile in names(summationsNames())) {
-
     # The current test expects a summation including 'Final Energy|Industry' in the summation
     # file to work. Skip summation file if this requirement is not met.
     sf <- getSummations(summationFile)
@@ -51,7 +50,6 @@ test_that("checkSummations works", {
       }
     })
     test_that(paste("test summationFile with errors using", summationFile), {
-
       # The current test expects a summation including Final Energy|Industry in the summation
       # file to work. Skip it if this requirement is not met for a summation file.
       sf <- getSummations(summationFile)
@@ -92,36 +90,6 @@ test_that("checkSummations works", {
 
   unlink(file.path(tempdir(), c("test.mif", "testerror.mif", "log.txt", "checkSummations.csv")))
 
-  # test usage of same variables multiple times as a child in summation groups ----
-  # Capacity|Electricity|Oil = Capacity|Electricity|Oil|w/o CCS + Capacity|Electricity|Oil|w/ CCS
-  # Capacity|Electricity" = ... + Capacity|Electricity|Nuclear, Capacity|Electricity|Oil|w/o CCS
-  varnames <- paste(c("Capacity|Electricity|Oil", "Capacity|Electricity|Oil|w/o CCS", "Capacity|Electricity|Oil|w/ CCS",
-                      "Capacity|Electricity", "Capacity|Electricity|Nuclear"),
-                    "(EJ/yr)")
-
-  data <- magclass::new.magpie(cells_and_regions = "GLO", years = c(2030), fill = c(10, 5, 5, 7, 2),
-                               names = varnames)
-
-  magclass::getSets(data)[3] <- "variable"
-  sumChecks <- checkSummations(mifFile = data, outputDirectory = NULL, summationsFile = "AR6") %>%
-    filter(diff != 0)
-  expect_true(nrow(sumChecks) == 0)
-
-  # test usage of different summations for same variable ----
-  # Final Energy = .. + Final Energy|Electricity + Final Energy|Gases
-  # Final Energy 2 = .. + Final Energy|Industry + Final Energy|Transportation
-
-  varnames <- paste(c("Final Energy", "Final Energy|Industry", "Final Energy|Transportation",
-                      "Final Energy|Electricity", "Final Energy|Gases"),
-                    "(EJ/yr)")
-
-  data <- magclass::new.magpie(cells_and_regions = "GLO", years = c(2030), fill = c(10, 5, 6, 7, 3),
-                               names = varnames)
-  magclass::getSets(data)[3] <- "variable"
-  sumChecks <- checkSummations(mifFile = data, outputDirectory = NULL, summationsFile = "AR6") %>%
-    filter(diff != 0)
-  expect_true(nrow(sumChecks) == 1)
-  expect_true(unique(sumChecks$variable) == "Final Energy 2")
 
   # test extractVariableGroups option, testing a magclass object  ----
   varnames <- paste(c("FE|Industry|Steel", "FE|Industry|Steel|+|Primary", "FE|Industry|Steel|+|Secondary"),
@@ -143,4 +111,46 @@ test_that("checkSummations works", {
 
   expect_warning(checkSummations(filter(qeAR6, 0 > 1), outputDirectory = NULL, summationsFile = "AR6"),
                  "No variable found that matches summationsFile")
+})
+
+test_that("usage of same variables multiple times as a child in summation groups works", {
+  # Emissions|CO2|Energy and Industrial Processes = Emissions|CO2|Industrial Processes + Emissions|CO2|Energy
+  # Emissions|CO2" = ... + Emissions|CO2|Industrial Processes + Emissions|CO2|Energy + Emissions|CO2|Waste
+
+  varnames <- paste(
+    c(
+      "Emissions|CO2|Energy and Industrial Processes", "Emissions|CO2|Industrial Processes",
+      "Emissions|CO2|Energy", "Emissions|CO2|Waste", "Emissions|CO2"
+    ),
+    "(EJ/yr)"
+  )
+
+  data <- magclass::new.magpie(
+    cells_and_regions = "GLO", years = c(2030), fill = c(10, 5, 5, 1, 11),
+    names = varnames
+  )
+
+  magclass::getSets(data)[3] <- "variable"
+  sumChecks <- checkSummations(mifFile = data, outputDirectory = NULL, summationsFile = "AR6") %>%
+    filter(diff != 0)
+  expect_true(nrow(sumChecks) == 0)
+
+})
+
+
+test_that("usage of different summations for same variable works", {
+  # Final Energy = .. + Final Energy|Electricity + Final Energy|Gases
+  # Final Energy 2 = .. + Final Energy|Industry + Final Energy|Transportation
+
+  varnames <- paste(c("Final Energy", "Final Energy|Industry", "Final Energy|Transportation",
+                      "Final Energy|Electricity", "Final Energy|Gases"),
+                    "(EJ/yr)")
+
+  data <- magclass::new.magpie(cells_and_regions = "GLO", years = c(2030), fill = c(10, 5, 6, 7, 3),
+                               names = varnames)
+  magclass::getSets(data)[3] <- "variable"
+  sumChecks <- checkSummations(mifFile = data, outputDirectory = NULL, summationsFile = "AR6") %>%
+    filter(diff != 0)
+  expect_true(nrow(sumChecks) == 1)
+  expect_true(unique(sumChecks$variable) == "Final Energy 2")
 })
