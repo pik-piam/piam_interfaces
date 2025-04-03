@@ -90,27 +90,6 @@ test_that("checkSummations works", {
 
   unlink(file.path(tempdir(), c("test.mif", "testerror.mif", "log.txt", "checkSummations.csv")))
 
-
-  # test extractVariableGroups option, testing a magclass object  ----
-  varnames <- paste(c("FE|Industry|Steel", "FE|Industry|Steel|+|Primary", "FE|Industry|Steel|+|Secondary"),
-                    "(EJ/yr)")
-  data <- magclass::new.magpie(cells_and_regions = "GLO", years = c(2030, 2050), fill = c(2, 4, 1, 2, 1, 2),
-                               names = varnames)
-  magclass::getSets(data)[3] <- "variable"
-  sumChecks <- checkSummations(mifFile = data, outputDirectory = NULL, summationsFile = "extractVariableGroups") %>%
-    filter(diff != 0)
-  expect_true(nrow(sumChecks) == 0)
-
-  dataerror <- magclass::new.magpie(cells_and_regions = "GLO", years = c(2030, 2050), fill = c(2, 4, 1, 1, 1, 1),
-                                    names = varnames)
-  magclass::getSets(dataerror)[3] <- "variable"
-  sumChecks <- dataerror %>%
-    checkSummations(outputDirectory = NULL, summationsFile = "extractVariableGroups") %>%
-    filter(.data$diff != 0)
-  expect_true(nrow(sumChecks) == 1)
-
-  expect_warning(checkSummations(filter(qeAR6, 0 > 1), outputDirectory = NULL, summationsFile = "AR6"),
-                 "No variable found that matches summationsFile")
 })
 
 test_that("usage of same variables multiple times as a child in summation groups works", {
@@ -153,4 +132,27 @@ test_that("usage of different summations for same variable works", {
     filter(diff != 0)
   expect_true(nrow(sumChecks) == 1)
   expect_true(unique(sumChecks$variable) == "Final Energy 2")
+})
+
+test_that("extractVariableGroups option works with a magclass object", {
+
+  varnames <- paste(c("FE|Industry|Steel", "FE|Industry|Steel|+|Primary", "FE|Industry|Steel|+|Secondary"),
+                    "(EJ/yr)")
+  data <- magclass::new.magpie(cells_and_regions = "GLO", years = c(2030, 2050), fill = c(2, 4, 1, 2, 1, 2),
+                               names = varnames)
+  magclass::getSets(data)[3] <- "variable"
+  sumChecks <- checkSummations(mifFile = data, outputDirectory = NULL, summationsFile = "extractVariableGroups") %>%
+    filter(diff != 0)
+  expect_true(nrow(sumChecks) == 0)
+
+  dataerror <- magclass::new.magpie(cells_and_regions = "GLO", years = c(2030, 2050), fill = c(2, 4, 1, 1, 1, 1),
+                                    names = varnames)
+  magclass::getSets(dataerror)[3] <- "variable"
+  sumChecks <- dataerror %>%
+    checkSummations(outputDirectory = NULL, summationsFile = "extractVariableGroups") %>%
+    filter(.data$diff != 0)
+  expect_true(nrow(sumChecks) == 1)
+
+  expect_warning(checkSummations(filter(qeAR6, 0 > 1), outputDirectory = NULL, summationsFile = "AR6"),
+                 "No variable found that matches summationsFile")
 })
